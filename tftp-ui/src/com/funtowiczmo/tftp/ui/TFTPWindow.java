@@ -282,12 +282,12 @@ public class TFTPWindow extends JFrame implements TFTPObserver, ActionListener {
                 String error = "Impossible de déterminer un chemin vers l'hôte : " + serverInput.getText() + ":" + portInput.getText();
 
                 logger.log(Level.WARNING, error);
-                JOptionPane.showMessageDialog(this, error, "Erreur :(", JOptionPane.ERROR_MESSAGE);
+                displayError(error);
             } catch (SocketException e1) {
                 String error = "Une erreur est survenue lors de la connexion";
 
                 logger.log(Level.WARNING, error);
-                JOptionPane.showMessageDialog(this, error, "Erreur :(", JOptionPane.ERROR_MESSAGE);
+                displayError(error);
             }
 
         }else if(e.getSource() == uploadChooser){
