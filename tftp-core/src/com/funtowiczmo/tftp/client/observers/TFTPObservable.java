@@ -59,7 +59,7 @@ public abstract class TFTPObservable {
         }
     }
 
-    protected void fireExceptionOccurred(final TFTPClient client, final TFTPException t){
+    protected void fireExceptionOccurred(final TFTPClient client, final Exception t){
         for(TFTPObserver o : observers){
             o.onExceptionOccured(client, t);
         }

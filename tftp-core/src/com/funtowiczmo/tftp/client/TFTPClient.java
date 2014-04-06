@@ -87,7 +87,7 @@ public class TFTPClient extends TFTPObservable {
     }
 
     public boolean isConnected(){
-        return false;
+        return handler == null ? false : handler.isConnected();
     }
 
     public void close(){
@@ -143,11 +143,7 @@ public class TFTPClient extends TFTPObservable {
                         receiveFile((RRQPacket) packet);
                     }
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (TFTPException e) {
+                } catch (Exception e) {
                     fireExceptionOccurred(TFTPClient.this, e);
                 }
             }

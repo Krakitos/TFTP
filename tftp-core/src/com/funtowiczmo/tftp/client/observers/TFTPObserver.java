@@ -17,6 +17,6 @@ public interface TFTPObserver {
     public void onFileReceptionStarted(String remoteFileName);
     public void onFileReceptionEnded(TFTPClient client, File holder);
 
-    public void onExceptionOccured(TFTPClient client, TFTPException t);
+    public void onExceptionOccured(TFTPClient client, Exception t);
     public void onProtocolError(TFTPClient client, int errno, String errorMsg);
 }

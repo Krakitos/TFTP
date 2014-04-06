@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.File;
+import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.logging.Handler;
@@ -84,14 +85,20 @@ public class TFTPWindow extends JFrame implements TFTPObserver, ActionListener {
         top.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         serverLabel = new JLabel("IP du serveur : ");
+
         serverInput = new JTextField("127.0.0.1");
         serverInput.setPreferredSize(new Dimension(100, 20));
+
         portLabel = new JLabel("Port du serveur : ");
+
         portInput = new JTextField("69");
         portInput.setPreferredSize(new Dimension(30, 20));
+
         progressBar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
         progressBar.setVisible(false);
         progressBar.setStringPainted(true);
+        progressBar.getSize().width += 60;
+        progressBar.getSize().height += 20;
 
         add(top, BorderLayout.NORTH);
 
@@ -252,13 +259,17 @@ public class TFTPWindow extends JFrame implements TFTPObserver, ActionListener {
     }
 
     @Override
-    public void onExceptionOccured(TFTPClient client, TFTPException t) {
-
+    public void onExceptionOccured(TFTPClient client, Exception t) {
+        if(t instanceof SocketException){
+            displayError("Le délais d'attente pour la requête a été dépassé ... ");
+        }else if(t instanceof TFTPException || t instanceof IOException){
+            displayError("Une erreur est survenue lors de l'émission ou la réception d'un packet : " + t.getMessage());
+        }
     }
 
     @Override
     public void onProtocolError(TFTPClient client, int errno, String errorMsg) {
-
+        displayError("Le serveur a renvoyé une erreur : (" + errno + ") : " + errorMsg );
     }
 
     @Override
