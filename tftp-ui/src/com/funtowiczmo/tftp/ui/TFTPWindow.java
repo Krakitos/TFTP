@@ -188,8 +188,8 @@ public class TFTPWindow extends JFrame implements TFTPObserver, ActionListener {
 
          /** Adding logging area **/
 
-        logArea = new JTextArea("Flux d'évènements :" + System.lineSeparator());
-        logArea.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1, true));
+        logArea = new JTextArea("Flux d'évènements :" + System.getProperty("line.separator"));
+        logArea.setBorder(BorderFactory.createLineBorder(Color.GRAY, 1));
         logArea.setPreferredSize(new Dimension(getWidth(), 150));
 
 
