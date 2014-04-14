@@ -93,7 +93,6 @@ public class TFTPClient extends TFTPObservable {
     public void close(){
         packetQueue.clear();
         handler.stop();
-        removeObservers();
     }
 
     private class TFTPClientCommunicationHandler implements Runnable{
