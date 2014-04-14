@@ -18,8 +18,4 @@ public class TFTPException extends Exception {
     public TFTPException(Throwable cause) {
         super(cause);
     }
-
-    public TFTPException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-        super(message, cause, enableSuppression, writableStackTrace);
-    }
 }
