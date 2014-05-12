@@ -54,7 +54,7 @@ public class TFTPClient extends TFTPObservable {
     }
 
     public int sendFile(File file, String remoteName, TFTPIOEnum mode){
-        if(!file.exists()) return 1;
+        if(!file.exists()) return TFTPClientReturnCode.FILE_DOESNT_EXIST;
 
         fireFileSendingStarted(file);
 
@@ -63,10 +63,10 @@ public class TFTPClient extends TFTPObservable {
         } catch (InterruptedException e) {
             e.printStackTrace();
 
-            return 2;
+            return TFTPClientReturnCode.THREAD_INTERRUPTION;
         }
 
-        return 0;
+        return TFTPClientReturnCode.RESULT_OK;
     }
 
     public int receiveFile(String remoteName, File storagePath, TFTPIOEnum mode){
@@ -78,12 +78,12 @@ public class TFTPClient extends TFTPObservable {
         } catch (InterruptedException e) {
             e.printStackTrace();
 
-            return 2;
+            return TFTPClientReturnCode.THREAD_INTERRUPTION;
         }
 
         fireFileReceptionEnded(this, storagePath);
 
-        return 0;
+        return TFTPClientReturnCode.RESULT_OK;
     }
 
     public boolean isConnected(){
